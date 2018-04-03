@@ -1,25 +1,24 @@
 {
-  "name": "html-webpack-transform-assets-plugin",
+  "name": "transform-html-webpack-plugin",
   "version": "0.0.1",
-  "description": "Transforms existing assets in an HTML template",
+  "description": "Transforms existing HTML elements in a template",
   "main": "dist/index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/BTOdell/html-webpack-transform-assets-plugin.git"
+    "url": "git+https://github.com/BTOdell/transform-html-webpack-plugin.git"
   },
   "keywords": [
     "webpack",
     "html-webpack-plugin",
     "plugin",
-    "transform",
-    "assets"
+    "transform"
   ],
   "author": "BTOdell",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/BTOdell/html-webpack-transform-assets-plugin/issues"
+    "url": "https://github.com/BTOdell/transform-html-webpack-plugin/issues"
   },
-  "homepage": "https://github.com/BTOdell/html-webpack-transform-assets-plugin#readme",
+  "homepage": "https://github.com/BTOdell/transform-html-webpack-plugin#readme",
   "devDependencies": {
     "@types/webpack": "^4.1.3",
     "html-webpack-plugin": "^3.2.0",

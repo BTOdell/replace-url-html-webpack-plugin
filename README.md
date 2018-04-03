@@ -1,2 +1,2 @@
-# html-webpack-transform-assets-plugin
-Transforms existing assets in an HTML template
+# transform-html-webpack-plugin
+Transforms existing HTML elements in a template

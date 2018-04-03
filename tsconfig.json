@@ -1,25 +1,25 @@
 {
-    "compileOnSave": true,
-    "compilerOptions": {
-        "baseUrl": "node_modules",
-        "module": "commonjs",
-        /*
-        "moduleResolution": "node",
-        */
-        "allowSyntheticDefaultImports": true,
-        /*"esModuleInterop": true,*/
-        "target": "es2017",
-        "outDir": "./dist",
-        "forceConsistentCasingInFileNames": true,
-        "sourceMap": true,
-        "declaration": true,
-        "alwaysStrict": true,
-        "noImplicitAny": true,
-        "noImplicitReturns": true,
-        "noImplicitThis": true,
-        /* strictFunctionTypes is disabled for now */
-        /*"strictFunctionTypes": true,*/
-        "strictNullChecks": true,
-        "strictPropertyInitialization": true
-    }
+  "compileOnSave": true,
+  "compilerOptions": {
+    "baseUrl": "node_modules",
+    "module": "commonjs",
+    /*
+    "moduleResolution": "node",
+    */
+    "allowSyntheticDefaultImports": true,
+    /*"esModuleInterop": true,*/
+    "target": "es2015",
+    "outDir": "./dist",
+    "forceConsistentCasingInFileNames": true,
+    "sourceMap": true,
+    "declaration": true,
+    "alwaysStrict": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    /* strictFunctionTypes is disabled for now */
+    /*"strictFunctionTypes": true,*/
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true
+  }
 }
