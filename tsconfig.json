@@ -9,6 +9,9 @@
     "allowSyntheticDefaultImports": true,
     /*"esModuleInterop": true,*/
     "target": "es2015",
+    "lib": [
+      "es2015"
+    ],
     "outDir": "./dist",
     "forceConsistentCasingInFileNames": true,
     "sourceMap": true,
