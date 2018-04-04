@@ -11,9 +11,9 @@ declare module "webpack" {
 /**
  *
  */
-declare class TransformHTMLWebpackPlugin {
+declare class ReplaceUrlHtmlWebpackPlugin {
     /**
-     * Initializes a new TransformHTMLWebpackPlugin.
+     * Initializes a new ReplaceUrlHtmlWebpackPlugin.
      */
     constructor();
     /**
@@ -21,4 +21,4 @@ declare class TransformHTMLWebpackPlugin {
      */
     apply(compiler: webpack.Compiler): void;
 }
-export = TransformHTMLWebpackPlugin;
+export = ReplaceUrlHtmlWebpackPlugin;

@@ -1,6 +1,5 @@
 "use strict";
 const path = require("path");
-const pluginName = "TransformHTMLWebpackPlugin";
 /**
  *
  * @param {string} html The input HTML string.
@@ -82,12 +81,13 @@ function getPathName(filePath) {
     }
     return path.join(dir, parsedPath.name);
 }
+const pluginName = "ReplaceUrlHtmlWebpackPlugin";
 /**
  *
  */
-class TransformHTMLWebpackPlugin {
+class ReplaceUrlHtmlWebpackPlugin {
     /**
-     * Initializes a new TransformHTMLWebpackPlugin.
+     * Initializes a new ReplaceUrlHtmlWebpackPlugin.
      */
     constructor() { }
     /**
@@ -97,7 +97,7 @@ class TransformHTMLWebpackPlugin {
         const compilerOptions = compiler.options;
         compiler.hooks.compilation.tap(pluginName, (compilation) => {
             compilation.hooks.htmlWebpackPluginBeforeHtmlProcessing.tap(pluginName, (data) => {
-                // Transform asset elements in HTML
+                // Replace asset elements in HTML
                 const assets = data.assets;
                 const jsFiles = assets.js;
                 const cssFiles = assets.css;
@@ -122,5 +122,5 @@ class TransformHTMLWebpackPlugin {
         });
     }
 }
-module.exports = TransformHTMLWebpackPlugin;
+module.exports = ReplaceUrlHtmlWebpackPlugin;
 //# sourceMappingURL=index.js.map

@@ -4,9 +4,7 @@ import {Configuration} from "webpack";
 import * as path from "path";
 import {ParsedPath} from "path";
 
-const pluginName = "TransformHTMLWebpackPlugin";
-
-// Added by the HTMLWebpackPlugin
+// Added by the HtmlWebpackPlugin
 declare module "webpack" {
     namespace compilation {
         interface CompilationHooks {
@@ -130,13 +128,15 @@ function getPathName(filePath: string): string {
     return path.join(dir, parsedPath.name);
 }
 
+const pluginName = "ReplaceUrlHtmlWebpackPlugin";
+
 /**
  * 
  */
-class TransformHTMLWebpackPlugin {
+class ReplaceUrlHtmlWebpackPlugin {
 
     /**
-     * Initializes a new TransformHTMLWebpackPlugin.
+     * Initializes a new ReplaceUrlHtmlWebpackPlugin.
      */
     constructor() {}
 
@@ -147,7 +147,7 @@ class TransformHTMLWebpackPlugin {
         const compilerOptions: webpack.Configuration = compiler.options;
         compiler.hooks.compilation.tap(pluginName, (compilation: webpack.compilation.Compilation) => {
             compilation.hooks.htmlWebpackPluginBeforeHtmlProcessing.tap(pluginName, (data: HTMLPluginData) => {
-                // Transform asset elements in HTML
+                // Replace asset elements in HTML
                 const assets: HTMLPluginDataAssets = data.assets;
                 const jsFiles: string[] = assets.js;
                 const cssFiles: string[] = assets.css;
@@ -166,7 +166,6 @@ class TransformHTMLWebpackPlugin {
                 }
                 // Assign HTML back to data object
                 data.html = html;
-                
                 // Return data object
                 return data;
             });
@@ -175,4 +174,4 @@ class TransformHTMLWebpackPlugin {
     
 }
 
-export = TransformHTMLWebpackPlugin;
+export = ReplaceUrlHtmlWebpackPlugin;
