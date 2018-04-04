@@ -12,7 +12,6 @@
     "lib": [
       "es2015"
     ],
-    "outDir": "./dist",
     "forceConsistentCasingInFileNames": true,
     "sourceMap": true,
     "declaration": true,

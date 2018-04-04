@@ -1,0 +1,7 @@
+# npmignore
+/.idea
+.npmignore
+.gitignore
+tsconfig.json
+index.ts
+index.js.map
