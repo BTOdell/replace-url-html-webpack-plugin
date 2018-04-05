@@ -1,24 +1,10 @@
 "use strict";
 const path = require("path");
-/**
- *
- * @param {string} html The input HTML string.
- * @param {string[]} jsFiles
- * @param {webpack.Configuration} compilerOptions
- * @returns {string} The output HTML string.
- */
 function replaceJS(html, jsFiles, compilerOptions) {
     return replace(html, jsFiles, compilerOptions, /(<script[\S\s]*?src=['"])(.+?)(['"][^>]*?>)/gi);
 }
-/**
- *
- * @param {string} html
- * @param {string[]} cssFiles
- * @param {webpack.Configuration} compilerOptions
- * @returns {string} The output HTML string.
- */
 function replaceCSS(html, cssFiles, compilerOptions) {
-    return html;
+    return replace(html, cssFiles, compilerOptions, /(<link[\S\s]*?href=['"])(.+?)(['"][^>]*?>)/gi);
 }
 function replace(html, files, compilerOptions, regex) {
     const basePath = getBasePath(compilerOptions);

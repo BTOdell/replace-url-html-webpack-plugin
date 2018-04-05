@@ -1,6 +1,5 @@
 import webpack = require("webpack");
 import {AsyncSeriesWaterfallHook} from "tapable";
-import {Configuration} from "webpack";
 import * as path from "path";
 import {ParsedPath} from "path";
 
@@ -40,26 +39,12 @@ interface HTMLPluginData {
 
 }
 
-/**
- *
- * @param {string} html The input HTML string.
- * @param {string[]} jsFiles
- * @param {webpack.Configuration} compilerOptions
- * @returns {string} The output HTML string.
- */
 function replaceJS(html: string, jsFiles: string[], compilerOptions: webpack.Configuration): string {
     return replace(html, jsFiles, compilerOptions, /(<script[\S\s]*?src=['"])(.+?)(['"][^>]*?>)/gi);
 }
 
-/**
- *
- * @param {string} html
- * @param {string[]} cssFiles
- * @param {webpack.Configuration} compilerOptions
- * @returns {string} The output HTML string.
- */
 function replaceCSS(html: string, cssFiles: string[], compilerOptions: webpack.Configuration): string {
-    return html;
+    return replace(html, cssFiles, compilerOptions, /(<link[\S\s]*?href=['"])(.+?)(['"][^>]*?>)/gi);
 }
 
 function replace(html: string, files: string[], compilerOptions: webpack.Configuration, regex: RegExp): string {
