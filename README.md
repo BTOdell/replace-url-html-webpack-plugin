@@ -1,7 +1,11 @@
 URL replacement for HTML Webpack Plugin
 =======================================
 
-
+![npm](https://img.shields.io/npm/v/replace-url-html-webpack-plugin.svg)
+![npm dependencies](https://david-dm.org/btodell/replace-url-html-webpack-plugin.svg)
+![node](https://img.shields.io/node/v/replace-url-html-webpack-plugin.svg)
+![npm type definitions](https://img.shields.io/npm/types/replace-url-html-webpack-plugin.svg)
+![npm license](https://img.shields.io/npm/l/replace-url-html-webpack-plugin.svg)
 
 [![NPM](https://nodei.co/npm/replace-url-html-webpack-plugin.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/replace-url-html-webpack-plugin/)
 
