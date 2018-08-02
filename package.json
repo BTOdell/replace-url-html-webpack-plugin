@@ -41,7 +41,7 @@
     "html-webpack-plugin": "^3.0.0"
   },
   "scripts": {
-    "test": "./node_modules/.bin/webpack --display-error-details --config test/test.js",
+    "test": "./node_modules/.bin/webpack --config test/test.js",
     "lint": "./node_modules/.bin/tslint --project ."
   },
   "engines": {

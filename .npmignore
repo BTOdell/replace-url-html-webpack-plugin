@@ -1,6 +1,6 @@
 # npmignore
 /.idea
-/test
+/test*
 .npmignore
 .gitignore
 tsconfig*
