@@ -1,6 +1,5 @@
-/// <reference types="webpack" />
-import webpack = require("webpack");
 import { AsyncSeriesWaterfallHook } from "tapable";
+import webpack = require("webpack");
 declare module "webpack" {
     namespace compilation {
         interface CompilationHooks {
@@ -12,10 +11,6 @@ declare module "webpack" {
  *
  */
 declare class ReplaceUrlHtmlWebpackPlugin {
-    /**
-     * Initializes a new ReplaceUrlHtmlWebpackPlugin.
-     */
-    constructor();
     /**
      * @override
      */

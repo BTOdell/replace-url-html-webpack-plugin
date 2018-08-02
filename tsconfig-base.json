@@ -1,0 +1,21 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "baseUrl": "node_modules",
+    "module": "commonjs",
+    "allowSyntheticDefaultImports": true,
+    "target": "es2015",
+    "lib": [
+      "es2015"
+    ],
+    "forceConsistentCasingInFileNames": true,
+    "sourceMap": true,
+    "declaration": true,
+    "alwaysStrict": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
+    "strictPropertyInitialization": true
+  }
+}

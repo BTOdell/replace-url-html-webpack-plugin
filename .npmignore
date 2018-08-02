@@ -1,7 +1,8 @@
 # npmignore
 /.idea
+/test
 .npmignore
 .gitignore
-tsconfig.json
-index.ts
-index.js.map
+tsconfig*
+*.ts
+*.js.*

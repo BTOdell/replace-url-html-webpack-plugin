@@ -1,27 +1,7 @@
 {
-  "compileOnSave": true,
-  "compilerOptions": {
-    "baseUrl": "node_modules",
-    "module": "commonjs",
-    /*
-    "moduleResolution": "node",
-    */
-    "allowSyntheticDefaultImports": true,
-    /*"esModuleInterop": true,*/
-    "target": "es2015",
-    "lib": [
-      "es2015"
-    ],
-    "forceConsistentCasingInFileNames": true,
-    "sourceMap": true,
-    "declaration": true,
-    "alwaysStrict": true,
-    "noImplicitAny": true,
-    "noImplicitReturns": true,
-    "noImplicitThis": true,
-    /* strictFunctionTypes is disabled for now */
-    /*"strictFunctionTypes": true,*/
-    "strictNullChecks": true,
-    "strictPropertyInitialization": true
-  }
+  "extends": "./tsconfig-base.json",
+  "compilerOptions": {},
+  "exclude": [
+    "test"
+  ]
 }

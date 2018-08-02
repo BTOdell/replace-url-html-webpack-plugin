@@ -26,7 +26,7 @@ function replace(html, files, compilerOptions, regex) {
             const file = files[i];
             const resolvedFile = path.resolve(basePath, file);
             const fileName = getPathName(resolvedFile);
-            if (scriptSourceName == fileName) {
+            if (scriptSourceName === fileName) {
                 // Replace!
                 replaceFile = path.relative(basePath, resolvedFile);
                 // Remove file from files array
@@ -73,10 +73,6 @@ const pluginName = "ReplaceUrlHtmlWebpackPlugin";
  */
 class ReplaceUrlHtmlWebpackPlugin {
     /**
-     * Initializes a new ReplaceUrlHtmlWebpackPlugin.
-     */
-    constructor() { }
-    /**
      * @override
      */
     apply(compiler) {
@@ -92,7 +88,7 @@ class ReplaceUrlHtmlWebpackPlugin {
                 html = replaceCSS(html, cssFiles, compilerOptions);
                 // Remove chunks that were removed
                 const chunks = assets.chunks;
-                for (let chunkName in chunks) {
+                for (const chunkName in chunks) {
                     if (chunks.hasOwnProperty(chunkName)) {
                         const chunk = chunks[chunkName];
                         if (jsFiles.indexOf(chunk.entry) < 0) {

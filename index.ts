@@ -1,7 +1,7 @@
-import webpack = require("webpack");
-import {AsyncSeriesWaterfallHook} from "tapable";
 import * as path from "path";
-import {ParsedPath} from "path";
+import { ParsedPath } from "path";
+import { AsyncSeriesWaterfallHook } from "tapable";
+import webpack = require("webpack");
 
 // Added by the HtmlWebpackPlugin
 declare module "webpack" {
@@ -34,7 +34,7 @@ interface HTMLPluginData {
 
     html: string;
     assets: HTMLPluginDataAssets;
-    //plugin: HtmlWebpackPlugin;
+    // plugin: HtmlWebpackPlugin;
     outputName: string;
 
 }
@@ -59,18 +59,18 @@ function replace(html: string, files: string[], compilerOptions: webpack.Configu
 
         output += html.substring(lastIndex, result.index);
         output += scriptPrefix;
-        
+
         // Resolve script source path
         const resolvedScriptSource: string = path.resolve(basePath, scriptSource);
         const scriptSourceName: string = getPathName(resolvedScriptSource);
-        
+
         // Determine if source should be replaced
         let replaceFile: string|undefined;
         for (let i = files.length - 1; i >= 0; i--) {
             const file: string = files[i];
             const resolvedFile: string = path.resolve(basePath, file);
             const fileName: string = getPathName(resolvedFile);
-            if (scriptSourceName == fileName) {
+            if (scriptSourceName === fileName) {
                 // Replace!
                 replaceFile = path.relative(basePath, resolvedFile);
                 // Remove file from files array
@@ -82,7 +82,7 @@ function replace(html: string, files: string[], compilerOptions: webpack.Configu
         } else {
             output += scriptSource;
         }
-        
+
         output += scriptSuffix;
 
         lastIndex = regex.lastIndex;
@@ -116,14 +116,9 @@ function getPathName(filePath: string): string {
 const pluginName = "ReplaceUrlHtmlWebpackPlugin";
 
 /**
- * 
+ *
  */
 class ReplaceUrlHtmlWebpackPlugin {
-
-    /**
-     * Initializes a new ReplaceUrlHtmlWebpackPlugin.
-     */
-    constructor() {}
 
     /**
      * @override
@@ -141,7 +136,7 @@ class ReplaceUrlHtmlWebpackPlugin {
                 html = replaceCSS(html, cssFiles, compilerOptions);
                 // Remove chunks that were removed
                 const chunks = assets.chunks;
-                for (let chunkName in chunks) {
+                for (const chunkName in chunks) {
                     if (chunks.hasOwnProperty(chunkName)) {
                         const chunk: HTMLPluginDataAssetChunk = chunks[chunkName];
                         if (jsFiles.indexOf(chunk.entry) < 0) {
@@ -156,7 +151,7 @@ class ReplaceUrlHtmlWebpackPlugin {
             });
         });
     }
-    
+
 }
 
 export = ReplaceUrlHtmlWebpackPlugin;
