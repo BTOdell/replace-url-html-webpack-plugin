@@ -1,11 +1,13 @@
 URL replacement for HTML Webpack Plugin
 =======================================
 
+[![Build Status](https://travis-ci.com/BTOdell/replace-url-html-webpack-plugin.svg?branch=master)](https://travis-ci.com/BTOdell/replace-url-html-webpack-plugin)
 ![npm](https://img.shields.io/npm/v/replace-url-html-webpack-plugin.svg)
 ![npm dependencies](https://david-dm.org/btodell/replace-url-html-webpack-plugin.svg)
 ![node](https://img.shields.io/node/v/replace-url-html-webpack-plugin.svg)
 ![npm type definitions](https://img.shields.io/npm/types/replace-url-html-webpack-plugin.svg)
 ![npm license](https://img.shields.io/npm/l/replace-url-html-webpack-plugin.svg)
+
 [![NPM](https://nodei.co/npm/replace-url-html-webpack-plugin.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/replace-url-html-webpack-plugin/)
 
 This is an extension plugin for the [webpack](https://www.npmjs.com/package/webpack) plugin [html-webpack-plugin](https://www.npmjs.com/package/html-webpack-plugin) - a plugin that simplifies the creation of HTML files to serve your webpack bundles.
