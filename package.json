@@ -31,6 +31,8 @@
     "@types/html-webpack-plugin": "^3.2.0",
     "@types/webpack": "^4.4.34",
     "html-webpack-plugin": "^3.2.0",
+    "npm-run-all": "^4.1.5",
+    "shx": "^0.3.2",
     "tslint": "^5.18.0",
     "typescript": "^3.5.2",
     "webpack": "^4.35.0",
@@ -41,8 +43,14 @@
     "html-webpack-plugin": "^3.0.0"
   },
   "scripts": {
-    "test": "webpack --config test/test.js",
-    "lint": "tslint --project ."
+    "build": "tsc -p . && tsc -p ./test",
+    "test": "npm run lint && npm run build && webpack --config test/test.js",
+    "lint": "tslint --project .",
+    "clean": "run-p -cs clean:*",
+    "clean:index": "shx rm -rf ./*.js ./*.js.map ./*.d.ts",
+    "clean:test": "shx rm -rf ./test/*.js ./test/*.js.map ./test/*.d.ts ./test-dist",
+    "clean-nm": "npx shx rm -rf ./node_modules",
+    "clean-all": "run-s -cs clean clean-nm"
   },
   "engines": {
     "node": ">=6.11.5"
