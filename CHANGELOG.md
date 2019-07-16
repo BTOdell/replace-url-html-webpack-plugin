@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.0.5 (2019-07-16)
+
+Updated NPM dependencies to fix security vulnerabilities.
+
 ## v1.0.4 (2019-06-28)
 
 Updated NPM dependencies to fix security vulnerabilities.
