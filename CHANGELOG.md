@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.0.6 (2019-10-30)
+
+Actually deploy JS files this time.
+
 ## v1.0.5 (2019-07-16)
 
 Updated NPM dependencies to fix security vulnerabilities.
