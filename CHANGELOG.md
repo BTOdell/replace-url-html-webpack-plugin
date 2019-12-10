@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.0.7 (2019-12-10)
+
+Updated NPM dependencies to fix security vulnerabilities.
+Updated Travis CI configuration file.
+
 ## v1.0.6 (2019-10-30)
 
 Actually deploy JS files this time.
