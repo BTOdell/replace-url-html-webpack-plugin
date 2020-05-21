@@ -1,53 +1,19 @@
 import * as path from "path";
 import { ParsedPath } from "path";
-import { AsyncSeriesWaterfallHook } from "tapable";
-import webpack = require("webpack");
+import * as webpack from "webpack";
+import * as HtmlWebpackPlugin from "html-webpack-plugin";
+import {HtmlTagObject} from "html-webpack-plugin";
 
-// Added by the HtmlWebpackPlugin
-declare module "webpack" {
-    namespace compilation {
-        interface CompilationHooks {
-            htmlWebpackPluginBeforeHtmlProcessing: AsyncSeriesWaterfallHook;
-        }
-    }
+function replaceJS(html: string, publicPath: string, assetTags: HtmlTagObject[], compilerOptions: webpack.Configuration): string {
+    return replace(html, publicPath, assetTags, "script", "src", compilerOptions, /(<script[\S\s]*?src=['"])(.+?)(['"][^>]*?>)/gi);
 }
 
-interface HTMLPluginDataAssetChunk {
-
-    size: number;
-    entry: string;
-    hash: string;
-    css: string[];
-
+function replaceCSS(html: string, publicPath: string, assetTags: HtmlTagObject[], compilerOptions: webpack.Configuration): string {
+    return replace(html, publicPath, assetTags, "link", "href", compilerOptions, /(<link[\S\s]*?href=['"])(.+?)(['"][^>]*?>)/gi);
 }
 
-interface HTMLPluginDataAssets {
-
-    publicPath: string;
-    chunks: { [key: string]: HTMLPluginDataAssetChunk };
-    js: string[];
-    css: string[];
-
-}
-
-interface HTMLPluginData {
-
-    html: string;
-    assets: HTMLPluginDataAssets;
-    // plugin: HtmlWebpackPlugin;
-    outputName: string;
-
-}
-
-function replaceJS(html: string, jsFiles: string[], compilerOptions: webpack.Configuration): string {
-    return replace(html, jsFiles, compilerOptions, /(<script[\S\s]*?src=['"])(.+?)(['"][^>]*?>)/gi);
-}
-
-function replaceCSS(html: string, cssFiles: string[], compilerOptions: webpack.Configuration): string {
-    return replace(html, cssFiles, compilerOptions, /(<link[\S\s]*?href=['"])(.+?)(['"][^>]*?>)/gi);
-}
-
-function replace(html: string, files: string[], compilerOptions: webpack.Configuration, regex: RegExp): string {
+function replace(html: string, publicPath: string, assetTags: HtmlTagObject[], filterAssetTagName: string, filterAssetTagAttribute: string,
+                 compilerOptions: webpack.Configuration, regex: RegExp): string {
     const basePath: string = getBasePath(compilerOptions);
     let output: string = "";
     let lastIndex: number = 0;
@@ -61,20 +27,34 @@ function replace(html: string, files: string[], compilerOptions: webpack.Configu
         output += scriptPrefix;
 
         // Resolve script source path
-        const resolvedScriptSource: string = path.resolve(basePath, scriptSource);
+        const resolvedScriptSource: string = path.join(basePath, scriptSource);
         const scriptSourceName: string = getPathName(resolvedScriptSource);
 
         // Determine if source should be replaced
         let replaceFile: string|undefined;
-        for (let i = files.length - 1; i >= 0; i--) {
-            const file: string = files[i];
-            const resolvedFile: string = path.resolve(basePath, file);
-            const fileName: string = getPathName(resolvedFile);
-            if (scriptSourceName === fileName) {
+        for (let i = assetTags.length - 1; i >= 0; i--) {
+            const assetTag: HtmlTagObject = assetTags[i];
+            if (assetTag.tagName !== filterAssetTagName) {
+                continue;
+            }
+            if (!(filterAssetTagAttribute in assetTag.attributes)) {
+                continue;
+            }
+            const assetPath: string | boolean = assetTag.attributes[filterAssetTagAttribute];
+            if (typeof assetPath !== "string") {
+                continue;
+            }
+            let assetFileName: string;
+            if (publicPath && assetPath.startsWith(publicPath)) {
+                assetFileName = assetPath.slice(publicPath.length);
+            } else {
+                assetFileName = assetPath;
+            }
+            if (scriptSourceName === getPathName(path.join(basePath, assetFileName))) {
                 // Replace!
-                replaceFile = path.relative(basePath, resolvedFile);
+                replaceFile = assetPath;
                 // Remove file from files array
-                files.splice(i, 1);
+                assetTags.splice(i, 1);
             }
         }
         if (replaceFile != null) {
@@ -118,7 +98,7 @@ const pluginName = "ReplaceUrlHtmlWebpackPlugin";
 /**
  *
  */
-class ReplaceUrlHtmlWebpackPlugin {
+export class ReplaceUrlHtmlWebpackPlugin {
 
     /**
      * @override
@@ -126,32 +106,26 @@ class ReplaceUrlHtmlWebpackPlugin {
     public apply(compiler: webpack.Compiler): void {
         const compilerOptions: webpack.Configuration = compiler.options;
         compiler.hooks.compilation.tap(pluginName, (compilation: webpack.compilation.Compilation) => {
-            compilation.hooks.htmlWebpackPluginBeforeHtmlProcessing.tap(pluginName, (data: HTMLPluginData) => {
-                // Replace asset elements in HTML
-                const assets: HTMLPluginDataAssets = data.assets;
-                const jsFiles: string[] = assets.js;
-                const cssFiles: string[] = assets.css;
-                let html: string = data.html;
-                html = replaceJS(html, jsFiles, compilerOptions);
-                html = replaceCSS(html, cssFiles, compilerOptions);
-                // Remove chunks that were removed
-                const chunks = assets.chunks;
-                for (const chunkName in chunks) {
-                    if (chunks.hasOwnProperty(chunkName)) {
-                        const chunk: HTMLPluginDataAssetChunk = chunks[chunkName];
-                        if (jsFiles.indexOf(chunk.entry) < 0) {
-                            delete chunks[chunkName];
-                        }
+            let publicPath: string | undefined;
+            HtmlWebpackPlugin.getHooks(compilation).beforeAssetTagGeneration.tapAsync(pluginName, (data, cb) => {
+                publicPath = data.assets.publicPath;
+                cb(null, data);
+            });
+            HtmlWebpackPlugin.getHooks(compilation).afterTemplateExecution.tapAsync(pluginName, (data, cb) => {
+                if (publicPath != null) {
+                    // Process both head and body tags
+                    for (const assetTags of [data.headTags, data.bodyTags]) {
+                        // Replace asset tags in HTML
+                        let html: string = data.html;
+                        html = replaceJS(html, publicPath, assetTags, compilerOptions);
+                        html = replaceCSS(html, publicPath, assetTags, compilerOptions);
+                        // Assign HTML back to data object
+                        data.html = html;
                     }
                 }
-                // Assign HTML back to data object
-                data.html = html;
-                // Return data object
-                return data;
+                cb(null, data);
             });
         });
     }
 
 }
-
-export = ReplaceUrlHtmlWebpackPlugin;

@@ -1,7 +1,7 @@
 import * as HtmlWebpackPlugin from "html-webpack-plugin";
 import * as path from "path";
 import * as webpack from "webpack";
-import ReplaceUrlHtmlWebpackPlugin = require("../index");
+import {ReplaceUrlHtmlWebpackPlugin} from "../index";
 
 const input: string = path.resolve(__dirname);
 const output: string = path.resolve(__dirname + "/../test-dist");

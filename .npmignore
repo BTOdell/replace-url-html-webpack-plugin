@@ -1,9 +1,0 @@
-# npmignore
-/.idea
-/test*
-.npmignore
-.gitignore
-tsconfig*
-*.ts
-!*.d.ts
-*.js.*

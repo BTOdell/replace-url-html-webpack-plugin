@@ -1,5 +1,12 @@
 # Changelog
 
+## v2.0.0 (2020-05-21)
+
+**Major release! Breaking changes!**
+
+* Updated for HTMLWebpackPlugin >= 4.0.0
+* Updated license from MIT to GPL-3.0
+
 ## v1.0.8 (2020-04-03)
 
 Updated NPM dependencies to fix security vulnerabilities.
