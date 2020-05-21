@@ -31,7 +31,7 @@ Environment
 Peer Dependencies
 ------------
 * webpack ([npm](https://www.npmjs.com/package/webpack)) ([github](https://github.com/webpack/webpack)) >= 4.0.0
-* html-webpack-plugin ([npm](https://www.npmjs.com/package/html-webpack-plugin)) ([github](https://github.com/jantimon/html-webpack-plugin)) >= 3.2.0
+* html-webpack-plugin ([npm](https://www.npmjs.com/package/html-webpack-plugin)) ([github](https://github.com/jantimon/html-webpack-plugin)) >= 4.0.0
 
 Installation
 ------------
